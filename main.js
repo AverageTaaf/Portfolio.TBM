@@ -563,22 +563,31 @@ document.addEventListener("DOMContentLoaded", () => {
       "Hi there! I'm Aura, Taafeef's digital companion. How's your day going?",
       "Hello! Ready to explore some cool projects?",
       "Greetings! I can help you find your way around this portfolio.",
+      "Hey! I'm powered by pure CSS and a bit of JS magic. What can I do for you?",
     ],
     projects:
-      "Taafeef has some amazing work! You should check out **Weatherify AI** or **LocalFlow Calendar**. Which one sounds more interesting?",
+      "Taafeef has some amazing work! You should check out **Weatherify AI**, **LocalFlow Calendar**, or the new **Qasas Prophetic**. Which one sounds more interesting? (I can even scroll to them for you!)",
     contact:
-      "You can unlock Taafeef's email by solving the riddle in the 'Let's Connect' section. It's a bit of a challenge, but I know you can do it!",
+      "You can unlock Taafeef's email by solving the riddle in the 'Let's Connect' section. It's a bit of a challenge, but I know you can do it! Or just find him on LinkedIn.",
     skills:
-      "Taafeef is a wizard with **JavaScript**, **React**, and **CSS**. He also loves playing with **Three.js** for 3D experiences!",
+      "Taafeef is a wizard with **JavaScript**, **React**, and **CSS**. He also loves playing with **Three.js** for 3D experiences and **Next.js** for full-stack apps!",
     about:
-      "Taafeef is a Creative Front-End Developer and UI/UX Architect based on Earth. He dreams in CSS variables!",
+      "Taafeef is a Creative Front-End Developer and UI/UX Architect. He doesn't just write code; he builds digital experiences that feel alive.",
+    qasas:
+      "**Qasas Prophetic** is one of Taafeef's latest works! It's a beautiful Next.js site showcasing stories of the Prophets. Would you like me to scroll to it?",
+    weatherify:
+      "**Weatherify AI** uses OpenAI to give you personalized weather advice. It's like having a meteorologist in your pocket!",
+    calendar:
+      "**LocalFlow Calendar** is a privacy-first productivity tool. No cloud, no tracking, just pure performance.",
     joke: [
       "Why did the web developer walk out of a restaurant? Because of the table layout.",
       "A SQL query walks into a bar, walks up to two tables, and asks, 'Can I join you?'",
       "Why do programmers always mix up Christmas and Halloween? Because Oct 31 == Dec 25.",
+      "How many programmers does it take to change a light bulb? None, that's a hardware problem.",
     ],
+    help: "I'm trained to help you with: <br>• **Projects** (ask about specific ones like Qasas or Weatherify)<br>• **Skills** & Tech Stack<br>• **Contact** information<br>• **About** Taafeef<br>• **Jokes** (for a quick laugh!)",
     default:
-      "That's interesting! I'm still learning, but you can ask me about projects, skills, or how to contact Taafeef.",
+      "That's interesting! I'm still learning, but you can ask me about projects, skills, or how to contact Taafeef. Try typing 'help' to see what I can do!",
   };
 
   function showTypingIndicator() {
@@ -606,40 +615,55 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function getBotResponse(input) {
     const text = input.toLowerCase();
-    if (text.includes("hello") || text.includes("hi") || text.includes("hey")) {
-      return botResponses.greeting[
-        Math.floor(Math.random() * botResponses.greeting.length)
-      ];
+
+    // 1. Navigation / Action Keywords
+    if (text.includes("scroll") || text.includes("show") || text.includes("go to")) {
+      if (text.includes("project")) {
+        document.getElementById("projects").scrollIntoView({ behavior: "smooth" });
+        return "Sure! Taking you to the projects section now...";
+      }
+      if (text.includes("contact") || text.includes("email")) {
+        document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
+        return "Navigating to the contact section. Good luck with the riddle!";
+      }
     }
-    if (text.includes("project") || text.includes("work")) {
+
+    // 2. Specific Project Queries
+    if (text.includes("qasas") || text.includes("prophet")) return botResponses.qasas;
+    if (text.includes("weather")) return botResponses.weatherify;
+    if (text.includes("calendar") || text.includes("localflow")) return botResponses.calendar;
+
+    // 3. General Categories
+    if (text.includes("hello") || text.includes("hi") || text.includes("hey")) {
+      return botResponses.greeting[Math.floor(Math.random() * botResponses.greeting.length)];
+    }
+    if (text.includes("project") || text.includes("work") || text.includes("portfolio")) {
       return botResponses.projects;
     }
-    if (
-      text.includes("contact") ||
-      text.includes("email") ||
-      text.includes("hire")
-    ) {
+    if (text.includes("contact") || text.includes("email") || text.includes("hire") || text.includes("message")) {
       return botResponses.contact;
     }
-    if (
-      text.includes("skill") ||
-      text.includes("tech") ||
-      text.includes("stack")
-    ) {
+    if (text.includes("skill") || text.includes("tech") || text.includes("stack") || text.includes("language")) {
       return botResponses.skills;
     }
-    if (
-      text.includes("who") ||
-      text.includes("about") ||
-      text.includes("taafeef")
-    ) {
+    if (text.includes("who") || text.includes("about") || text.includes("taafeef") || text.includes("creator")) {
       return botResponses.about;
     }
-    if (text.includes("joke") || text.includes("funny")) {
-      return botResponses.joke[
-        Math.floor(Math.random() * botResponses.joke.length)
-      ];
+    if (text.includes("joke") || text.includes("funny") || text.includes("laugh")) {
+      return botResponses.joke[Math.floor(Math.random() * botResponses.joke.length)];
     }
+    if (text.includes("help") || text.includes("can you") || text.includes("commands")) {
+      return botResponses.help;
+    }
+    if (text.includes("time")) {
+      return `Current local time is ${new Date().toLocaleTimeString()}. Time flies when you're exploring code!`;
+    }
+
+    // 4. Sentiment Detection (Very basic)
+    if (text.includes("cool") || text.includes("awesome") || text.includes("love") || text.includes("nice")) {
+      return "Thank you! Taafeef put a lot of heart into this. Glad you're enjoying it!";
+    }
+
     return botResponses.default;
   }
 
