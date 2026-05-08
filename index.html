@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taafeef Bin Montaquim | Portfolio</title>
+    <meta name="description" content="A world-class creative front-end developer and UI/UX architect portfolio.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="theme-dark">
+    <!-- Page Transition Scanline -->
+    <div class="scanline" id="scanline"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-ring" id="cursor-ring"></div>
+
+    <!-- Noise Overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- System Monitoring Widget -->
+    <div class="system-widget hover-interactive">
+        <div class="widget-row">
+            <span class="widget-label">System</span>
+            <span class="widget-value status-online">Online</span>
+        </div>
+        <div class="widget-row">
+            <span class="widget-label">Pulse</span>
+            <span class="widget-value" id="pulse-value">98%</span>
+        </div>
+        <div class="widget-row">
+            <span class="widget-label">Scroll Stamina</span>
+            <span class="widget-value" id="scroll-stamina">100%</span>
+        </div>
+        <div class="widget-row">
+            <span class="widget-label">Curiosity</span>
+            <span class="widget-value" id="curiosity-score">0</span>
+        </div>
+    </div>
+
+    <!-- Scroll to Top UFO -->
+    <button id="scroll-to-top" class="hover-interactive" aria-label="Scroll to top">
+        <i data-feather="arrow-up"></i>
+    </button>
+
+    <main class="container">
+        <!-- Section 1: Bento Box Hero -->
+        <section class="hero-bento reveal-on-scroll">
+            <div class="bento-card bento-main">
+                <div class="hero-avatar">
+                    <img src="CircleHeadshot.png" alt="Taafeef Bin Montaquim">
+                </div>
+                <h1 class="hero-title">Hello, I'm <span class="accent-text">Taafeef Bin Montaquim</span>.</h1>
+                <h2 class="dynamic-headline">I <span id="typed-text"></span><span class="cursor-blink">_</span></h2>
+                <p class="hero-desc">Creative Front-End Developer & UI/UX Architect.</p>
+                <button class="primary-btn hover-interactive"
+                    onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})">
+                    Explore My World <i data-feather="arrow-down-right"></i>
+                </button>
+            </div>
+
+            <div class="bento-card bento-location hover-interactive">
+                <div class="bento-icon"><i data-feather="map-pin"></i></div>
+                <div class="bento-content">
+                    <h3>Location</h3>
+                    <p>Earth, Cyberspace</p>
+                    <p class="time-display" id="local-time">--:--:--</p>
+                </div>
+            </div>
+
+            <div class="bento-card bento-status hover-interactive">
+                <div class="bento-icon"><i data-feather="coffee"></i></div>
+                <div class="bento-content">
+                    <h3>Current Status</h3>
+                    <p>Brewing ideas and refactoring reality.</p>
+                </div>
+            </div>
+
+            <div class="bento-card bento-funfact hover-interactive">
+                <div class="bento-icon"><i data-feather="zap"></i></div>
+                <div class="bento-content">
+                    <h3>Fun Fact</h3>
+                    <p>I dream in CSS variables and wake up in dark mode.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Projects (Asymmetrical Grid) -->
+        <section id="projects" class="projects-section">
+            <h2 class="section-title reveal-on-scroll">Selected Work</h2>
+
+            <div class="project-filters reveal-on-scroll">
+                <button class="filter-btn active hover-interactive" data-filter="all">All</button>
+                <button class="filter-btn hover-interactive" data-filter="interactive">Interactive</button>
+                <button class="filter-btn hover-interactive" data-filter="3d">3D/WebGL</button>
+                <button class="filter-btn hover-interactive" data-filter="uiux">UI/UX</button>
+            </div>
+
+            <div class="project-grid">
+                <!-- Project 1 (Large) -->
+                <div class="project-card large reveal-on-scroll hover-interactive tilt-card"
+                    data-category="interactive uiux">
+                    <div class="project-image">
+                        <div class="skeleton"></div>
+                        <img data-src="https://i.postimg.cc/B6GXy1pX/Weatherify.png" alt="Weatherify AI"
+                            class="lazy-load">
+                        <div class="project-overlay">
+                            <button class="read-more-btn hover-interactive" data-target="modal-1">View Case
+                                Study</button>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Weatherify AI</h3>
+                        <p>Get accurate weather updates with AI-powered analysis.</p>
+                    </div>
+                </div>
+
+                <!-- Project 2 (Small) -->
+                <div class="project-card small reveal-on-scroll hover-interactive tilt-card"
+                    data-category="3d interactive">
+                    <div class="project-image">
+                        <div class="skeleton"></div>
+                        <img data-src="https://i.postimg.cc/fLhJF0C3/Type-Master.png" alt="TypeMaster AI"
+                            class="lazy-load">
+                        <div class="project-overlay">
+                            <button class="read-more-btn hover-interactive" data-target="modal-2">View Case
+                                Study</button>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>TypeMaster AI</h3>
+                        <p>Improve your typing skills with AI-powered guidance.</p>
+                    </div>
+                </div>
+
+                <!-- Project 3 (Small) -->
+                <div class="project-card small reveal-on-scroll hover-interactive tilt-card" data-category="uiux">
+                    <div class="project-image">
+                        <div class="skeleton"></div>
+                        <img data-src="https://i.postimg.cc/G21HNsK4/Task-Schedule.png" alt="TaskSchedule Pro"
+                            class="lazy-load">
+                        <div class="project-overlay">
+                            <button class="read-more-btn hover-interactive" data-target="modal-3">View Case
+                                Study</button>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>TaskSchedule Pro</h3>
+                        <p>A productive desktop app with an AI powered scheduler.</p>
+                    </div>
+                </div>
+
+                <!-- Project 4 (Large) -->
+                <div class="project-card large reveal-on-scroll hover-interactive tilt-card"
+                    data-category="interactive uiux">
+                    <div class="project-image">
+                        <div class="skeleton"></div>
+                        <img data-src="LocalFlowCalendar.png" alt="LocalFlow Calendar" class="lazy-load">
+                        <div class="project-overlay">
+                            <button class="read-more-btn hover-interactive" data-target="modal-4">View Case
+                                Study</button>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>LocalFlow Calendar</h3>
+                        <p>A premium, privacy-focused calendar and productivity suite with local storage.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Skills Diagram -->
+        <section class="skills-section reveal-on-scroll">
+            <h2 class="section-title">Tech Arsenal</h2>
+            <div class="skills-bubble-container" id="skills-container">
+                <!-- Bubbles generated by JS -->
+            </div>
+        </section>
+
+        <!-- Section 4: Gamified Contact Challenge -->
+        <section id="contact" class="contact-section reveal-on-scroll">
+            <h2 class="section-title">Let's Connect</h2>
+            <p class="contact-subtitle">Prove you're human (or a very smart AI) to unlock my email.</p>
+
+            <div class="challenge-selector reveal-on-scroll">
+                <button class="challenge-btn active hover-interactive" data-challenge="riddle">Riddle Mode</button>
+                <button class="challenge-btn hover-interactive" data-challenge="game">Neuro-Sync Game</button>
+            </div>
+
+            <div class="riddle-container">
+                <div class="riddle-box bento-card challenge-view" id="riddle-view">
+                    <h3 id="riddle-question">What gets wetter as it dries?</h3>
+                    <input type="text" id="riddle-answer" class="riddle-input" placeholder="Type your answer...">
+                    <div
+                        style="display: flex; gap: 1rem; justify-content: center; align-items: center; margin-top: 1rem;">
+                        <button id="submit-riddle" class="primary-btn hover-interactive"
+                            style="margin-top: 0;">Unlock</button>
+                        <button id="hint-btn" class="filter-btn hover-interactive"
+                            style="margin-top: 0; padding: 0.75rem 1.5rem;">Hint</button>
+                    </div>
+                    <p id="riddle-hint-text" class="riddle-feedback hidden"
+                        style="color: var(--accent-2); margin-top: 1rem; font-style: italic;"></p>
+                    <p id="riddle-feedback" class="riddle-feedback"></p>
+                </div>
+
+                <div class="game-box bento-card challenge-view hidden" id="game-view">
+                    <h3>Neuro-Sync Challenge</h3>
+                    <p class="game-instruction">Sync your pulse by clicking the nodes as they appear.</p>
+                    <div class="game-canvas" id="game-canvas">
+                        <div class="game-start-overlay">
+                            <button id="start-game" class="primary-btn hover-interactive">Initialize Sync</button>
+                        </div>
+                        <div id="game-stats" class="hidden">
+                            Progress: <span id="game-progress">0/5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="unlocked-contact hidden" id="unlocked-contact">
+                    <div class="success-animation"><i data-feather="check-circle"></i></div>
+                    <h3>Access Granted</h3>
+                    <a href="mailto:help.innovation.cct@gmail.com" class="email-btn hover-interactive">
+                        help.innovation.cct@gmail.com <i data-feather="mail"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer with Terminal -->
+    <footer class="terminal-footer">
+        <div class="terminal-header">
+            <span class="terminal-dot red"></span>
+            <span class="terminal-dot yellow"></span>
+            <span class="terminal-dot green"></span>
+            <span class="terminal-title">guest@portfolio: ~</span>
+        </div>
+        <div class="terminal-body" id="terminal-body">
+            <p>Welcome to the system. Type 'help' for available commands.</p>
+        </div>
+        <div class="terminal-input-line">
+            <span class="prompt-symbol">$</span>
+            <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false"
+                placeholder="Type a command...">
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal-overlay" id="modal-1">
+        <div class="modal-content bento-card">
+            <button class="close-modal hover-interactive"><i data-feather="x"></i></button>
+            <h2 class="modal-title">Weatherify AI</h2>
+            <div class="modal-body">
+                <p><strong>Problem:</strong> Users struggle to get personalized, actionable insights from standard
+                    weather applications.</p>
+                <p><strong>Solution:</strong> An intelligent weather dashboard that leverages AI to analyze
+                    meteorological data and provide highly accurate, tailored forecasts and recommendations.</p>
+                <p><strong>Stack:</strong> React, Node.js, OpenWeather API, OpenAI API, Tailwind CSS.</p>
+                <a href="https://weatherify-ai.netlify.app/" target="_blank" class="primary-btn hover-interactive"
+                    style="margin-top: 1.5rem; text-decoration: none; display: inline-flex;">View Website <i
+                        data-feather="external-link" style="margin-left: 0.5rem;"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-2">
+        <div class="modal-content bento-card">
+            <button class="close-modal hover-interactive"><i data-feather="x"></i></button>
+            <h2 class="modal-title">TypeMaster AI</h2>
+            <div class="modal-body">
+                <p><strong>Problem:</strong> Traditional typing tutors are repetitive and fail to adapt to a user's
+                    specific weak points.</p>
+                <p><strong>Solution:</strong> An adaptive typing instructor that uses machine learning to generate
+                    custom practice paragraphs targeting the user's specific errors in real-time, wrapped in a gamified
+                    UI.</p>
+                <p><strong>Stack:</strong> Vanilla JS, Canvas API, TensorFlow.js, CSS Variables.</p>
+                <a href="https://typemaster-ai.netlify.app/" target="_blank" class="primary-btn hover-interactive"
+                    style="margin-top: 1.5rem; text-decoration: none; display: inline-flex;">View Website <i
+                        data-feather="external-link" style="margin-left: 0.5rem;"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-3">
+        <div class="modal-content bento-card">
+            <button class="close-modal hover-interactive"><i data-feather="x"></i></button>
+            <h2 class="modal-title">TaskSchedule Pro</h2>
+            <div class="modal-body">
+                <p><strong>Problem:</strong> Professionals lose significant time manually planning their day and
+                    adjusting schedules when unexpected tasks arise.</p>
+                <p><strong>Solution:</strong> A sleek application featuring an AI-driven scheduling engine that
+                    automatically prioritizes tasks, auto-reschedules conflicts, and optimizes deep work blocks.</p>
+                <p><strong>Stack:</strong> Electron, React, TypeScript, Python (FastAPI).</p>
+                <a href="https://taskschedulepro.netlify.app/" target="_blank" class="primary-btn hover-interactive"
+                    style="margin-top: 1.5rem; text-decoration: none; display: inline-flex;">View Website <i
+                        data-feather="external-link" style="margin-left: 0.5rem;"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-4">
+        <div class="modal-content bento-card">
+            <button class="close-modal hover-interactive"><i data-feather="x"></i></button>
+            <h2 class="modal-title">LocalFlow Calendar</h2>
+            <div class="modal-body">
+                <p><strong>Problem:</strong> Many calendar apps sacrifice privacy and local performance for cloud-based
+                    features, leading to latency and data concerns.</p>
+                <p><strong>Solution:</strong> A high-performance, aesthetically pleasing calendar application that
+                    prioritizes local-first data storage, smooth interactions, and a comprehensive productivity suite
+                    including alarms, mood tracking, and task management.</p>
+                <p><strong>Stack:</strong> Vanilla JS, HTML5, CSS3, IndexedDB, Feather Icons.</p>
+                <a href="https://localflow-calendar.netlify.app/" target="_blank" class="primary-btn hover-interactive"
+                    style="margin-top: 1.5rem; text-decoration: none; display: inline-flex;">View Website <i
+                        data-feather="external-link" style="margin-left: 0.5rem;"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot Widget -->
+    <div id="chatbot-widget" class="chatbot-container">
+        <div id="chatbot-button" class="chatbot-toggle hover-interactive" aria-label="Open chat">
+            <i data-feather="message-square"></i>
+            <span class="chat-status-pulse"></span>
+        </div>
+
+        <div id="chat-window" class="chat-window bento-card">
+            <div class="chat-header">
+                <div class="chat-title">
+                    <span class="chat-online-dot"></span>
+                    <h3>Aura Assistant</h3>
+                </div>
+                <button id="close-chat" class="close-chat-btn hover-interactive"><i data-feather="x"></i></button>
+            </div>
+
+            <div id="chat-messages" class="chat-messages">
+                <div class="message bot-message">
+                    Hello! I'm Aura. How can I help you explore Taafeef's world today?
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Ask me something..." autocomplete="off">
+                <button id="send-chat" class="send-chat-btn hover-interactive"><i data-feather="send"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="main.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+
+</html>
