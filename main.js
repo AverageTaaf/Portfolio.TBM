@@ -1,6 +1,44 @@
 // Addictive Portfolio - Main JS Logic
 
 document.addEventListener("DOMContentLoaded", () => {
+  // --- 0. Loading Screen ---
+  const loadingScreen = document.getElementById("loading-screen");
+  const loadingBar = document.getElementById("loading-bar");
+  const loadingProgress = document.querySelector(".loading-progress");
+  
+  if (loadingScreen && loadingBar && loadingProgress) {
+    document.body.style.overflow = "hidden"; // Prevent scrolling while loading
+    
+    let progress = 0;
+    const loadingInterval = setInterval(() => {
+      progress += Math.random() * 15 + 5;
+      
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(loadingInterval);
+        
+        loadingBar.style.width = `${progress}%`;
+        loadingProgress.textContent = `${Math.floor(progress)}%`;
+        
+        setTimeout(() => {
+          loadingScreen.classList.add("hidden");
+          document.body.style.overflow = ""; // Restore scrolling
+          
+          // Restart scanline animation so it plays after loading
+          const scanline = document.getElementById("scanline");
+          if (scanline) {
+            scanline.style.animation = "none";
+            void scanline.offsetWidth; // trigger reflow
+            scanline.style.animation = "scanline-sweep 3s ease-out forwards";
+          }
+        }, 600);
+      } else {
+        loadingBar.style.width = `${progress}%`;
+        loadingProgress.textContent = `${Math.floor(progress)}%`;
+      }
+    }, 150);
+  }
+
   // --- 1. Global State & Context ---
   let curiosityScore = 0;
   const isMobile = window.innerWidth <= 768;
@@ -112,8 +150,8 @@ document.addEventListener("DOMContentLoaded", () => {
       typeSpeed = 500; // Pause before new word
     }
     setTimeout(typeEffect, typeSpeed);
-  }
-  setTimeout(typeEffect, 1000); // Start after scanline
+    }
+    setTimeout(typeEffect, 2500); // Start after loading screen and scanline
 
   // --- 4. Time and Night Mode ---
   function updateTime() {
