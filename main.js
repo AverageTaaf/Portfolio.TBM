@@ -9,17 +9,28 @@ document.addEventListener("DOMContentLoaded", () => {
   if (loadingScreen && loadingBar && loadingProgress) {
     document.body.style.overflow = "hidden"; // Prevent scrolling while loading
     
-    let progress = 0;
-    const loadingInterval = setInterval(() => {
-      progress += Math.random() * 15 + 5;
+    let startTime = null;
+    const loadDuration = 2800; // Stay visible for almost 3 seconds
+    
+    // Smooth easing function
+    function easeOutQuart(x) {
+      return 1 - Math.pow(1 - x, 4);
+    }
+    
+    function animateLoading(timestamp) {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      let progress = Math.min(elapsed / loadDuration, 1);
       
-      if (progress >= 100) {
-        progress = 100;
-        clearInterval(loadingInterval);
-        
-        loadingBar.style.width = `${progress}%`;
-        loadingProgress.textContent = `${Math.floor(progress)}%`;
-        
+      const easedProgress = easeOutQuart(progress);
+      const currentPercent = Math.min(Math.floor(easedProgress * 100), 100);
+      
+      loadingBar.style.width = `${easedProgress * 100}%`;
+      loadingProgress.textContent = `${currentPercent}%`;
+      
+      if (progress < 1) {
+        requestAnimationFrame(animateLoading);
+      } else {
         setTimeout(() => {
           loadingScreen.classList.add("hidden");
           document.body.style.overflow = ""; // Restore scrolling
@@ -31,12 +42,11 @@ document.addEventListener("DOMContentLoaded", () => {
             void scanline.offsetWidth; // trigger reflow
             scanline.style.animation = "scanline-sweep 3s ease-out forwards";
           }
-        }, 600);
-      } else {
-        loadingBar.style.width = `${progress}%`;
-        loadingProgress.textContent = `${Math.floor(progress)}%`;
+        }, 800); // Stay at 100% for 800ms
       }
-    }, 150);
+    }
+    
+    requestAnimationFrame(animateLoading);
   }
 
   // --- 1. Global State & Context ---
@@ -151,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     setTimeout(typeEffect, typeSpeed);
     }
-    setTimeout(typeEffect, 2500); // Start after loading screen and scanline
+    setTimeout(typeEffect, 4000); // Start after loading screen and scanline
 
   // --- 4. Time and Night Mode ---
   function updateTime() {

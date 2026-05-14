@@ -270,7 +270,7 @@ body.hovering .cursor-ring {
   width: 0%;
   background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
   border-radius: 2px;
-  transition: width 0.15s ease-out;
+  /* Removed CSS transition to allow smooth JS requestAnimationFrame updates */
   box-shadow: 0 0 15px var(--accent-2);
 }
 
