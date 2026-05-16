@@ -35,6 +35,18 @@ document.addEventListener("DOMContentLoaded", () => {
           loadingScreen.classList.add("hidden");
           document.body.style.overflow = ""; // Restore scrolling
           
+          // Mark page as ready for animations
+          document.body.classList.add("page-ready");
+
+          // Trigger entry animations for elements already in viewport
+          const revealElements = document.querySelectorAll(".reveal-on-scroll");
+          revealElements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight) {
+              el.classList.add("is-revealed");
+            }
+          });
+          
           // Restart scanline animation so it plays after loading
           const scanline = document.getElementById("scanline");
           if (scanline) {
@@ -188,7 +200,10 @@ document.addEventListener("DOMContentLoaded", () => {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("is-revealed");
+          // Only reveal if the loading screen is gone
+          if (document.body.classList.contains("page-ready")) {
+            entry.target.classList.add("is-revealed");
+          }
           // Optional: stop observing once revealed
           // scrollObserver.unobserve(entry.target);
         }
