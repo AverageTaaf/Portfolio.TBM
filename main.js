@@ -761,4 +761,16 @@ document.addEventListener("DOMContentLoaded", () => {
   chatInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") handleChat();
   });
+
+  // Suggestion Chips
+  document.querySelectorAll(".suggestion-chip").forEach((chip) => {
+    chip.addEventListener("click", () => {
+      const query = chip.getAttribute("data-query");
+      chatInput.value = query;
+      handleChat();
+      
+      // Optional: Hide suggestions after use or keep them
+      // document.getElementById('chat-suggestions').style.display = 'none';
+    });
+  });
 });

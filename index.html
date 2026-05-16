@@ -390,20 +390,33 @@
         <div id="chat-window" class="chat-window bento-card">
             <div class="chat-header">
                 <div class="chat-title">
-                    <span class="chat-online-dot"></span>
-                    <h3>Aura Assistant</h3>
+                    <div class="chat-avatar-mini">
+                        <span class="chat-online-dot"></span>
+                        <i data-feather="cpu"></i>
+                    </div>
+                    <div class="chat-title-text">
+                        <h3>Aura Assistant</h3>
+                        <span class="chat-subtitle">Creative Neural Link</span>
+                    </div>
                 </div>
                 <button id="close-chat" class="close-chat-btn hover-interactive"><i data-feather="x"></i></button>
             </div>
 
             <div id="chat-messages" class="chat-messages">
                 <div class="message bot-message">
-                    Hello! I'm Aura. I can help you with <b>projects</b>, <b>skills</b>, <b>contact</b> info, or even tell you a <b>joke</b>! What's on your mind?
+                    Hello! I'm Aura. I've analyzed your navigation patterns and I'm ready to assist. You can ask about <b>projects</b>, <b>skills</b>, or even try to <b>unlock</b> the contact channel.
                 </div>
             </div>
 
+            <div id="chat-suggestions" class="chat-suggestions">
+                <button class="suggestion-chip hover-interactive" data-query="Show me your projects">Projects</button>
+                <button class="suggestion-chip hover-interactive" data-query="What are your skills?">Skills</button>
+                <button class="suggestion-chip hover-interactive" data-query="Tell me a joke">Joke</button>
+                <button class="suggestion-chip hover-interactive" data-query="How to contact you?">Contact</button>
+            </div>
+
             <div class="chat-input-area">
-                <input type="text" id="chat-input" placeholder="Ask me something..." autocomplete="off">
+                <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off">
                 <button id="send-chat" class="send-chat-btn hover-interactive"><i data-feather="send"></i></button>
             </div>
         </div>
