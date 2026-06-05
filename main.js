@@ -5,48 +5,48 @@ document.addEventListener("DOMContentLoaded", () => {
   const loadingScreen = document.getElementById("loading-screen");
   const loadingBar = document.getElementById("loading-bar");
   const loadingProgress = document.querySelector(".loading-progress");
-  
+
   if (loadingScreen && loadingBar && loadingProgress) {
     document.body.style.overflow = "hidden"; // Prevent scrolling while loading
-    
+
     let startTime = null;
     const loadDuration = 2800; // Stay visible for almost 3 seconds
-    
+
     // Smooth easing function
     function easeOutQuart(x) {
       return 1 - Math.pow(1 - x, 4);
     }
-    
+
     function animateLoading(timestamp) {
       if (!startTime) startTime = timestamp;
       const elapsed = timestamp - startTime;
       let progress = Math.min(elapsed / loadDuration, 1);
-      
+
       const easedProgress = easeOutQuart(progress);
       const currentPercent = Math.min(Math.floor(easedProgress * 100), 100);
-      
+
       loadingBar.style.width = `${easedProgress * 100}%`;
       loadingProgress.textContent = `${currentPercent}%`;
-      
+
       if (progress < 1) {
         requestAnimationFrame(animateLoading);
       } else {
         setTimeout(() => {
           loadingScreen.classList.add("hidden");
           document.body.style.overflow = ""; // Restore scrolling
-          
+
           // Mark page as ready for animations
           document.body.classList.add("page-ready");
 
           // Trigger entry animations for elements already in viewport
           const revealElements = document.querySelectorAll(".reveal-on-scroll");
-          revealElements.forEach(el => {
+          revealElements.forEach((el) => {
             const rect = el.getBoundingClientRect();
             if (rect.top < window.innerHeight) {
               el.classList.add("is-revealed");
             }
           });
-          
+
           // Restart scanline animation so it plays after loading
           const scanline = document.getElementById("scanline");
           if (scanline) {
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 800); // Stay at 100% for 800ms
       }
     }
-    
+
     requestAnimationFrame(animateLoading);
   }
 
@@ -172,8 +172,8 @@ document.addEventListener("DOMContentLoaded", () => {
       typeSpeed = 500; // Pause before new word
     }
     setTimeout(typeEffect, typeSpeed);
-    }
-    setTimeout(typeEffect, 4000); // Start after loading screen and scanline
+  }
+  setTimeout(typeEffect, 4000); // Start after loading screen and scanline
 
   // --- 4. Time and Night Mode ---
   function updateTime() {
@@ -680,42 +680,83 @@ document.addEventListener("DOMContentLoaded", () => {
     const text = input.toLowerCase();
 
     // 1. Navigation / Action Keywords
-    if (text.includes("scroll") || text.includes("show") || text.includes("go to")) {
+    if (
+      text.includes("scroll") ||
+      text.includes("show") ||
+      text.includes("go to")
+    ) {
       if (text.includes("project")) {
-        document.getElementById("projects").scrollIntoView({ behavior: "smooth" });
+        document
+          .getElementById("projects")
+          .scrollIntoView({ behavior: "smooth" });
         return "Sure! Taking you to the projects section now...";
       }
       if (text.includes("contact") || text.includes("email")) {
-        document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
+        document
+          .getElementById("contact")
+          .scrollIntoView({ behavior: "smooth" });
         return "Navigating to the contact section. Good luck with the riddle!";
       }
     }
 
     // 2. Specific Project Queries
-    if (text.includes("qasas") || text.includes("prophet")) return botResponses.qasas;
+    if (text.includes("qasas") || text.includes("prophet"))
+      return botResponses.qasas;
     if (text.includes("weather")) return botResponses.weatherify;
-    if (text.includes("calendar") || text.includes("localflow")) return botResponses.calendar;
+    if (text.includes("calendar") || text.includes("localflow"))
+      return botResponses.calendar;
 
     // 3. General Categories
     if (text.includes("hello") || text.includes("hi") || text.includes("hey")) {
-      return botResponses.greeting[Math.floor(Math.random() * botResponses.greeting.length)];
+      return botResponses.greeting[
+        Math.floor(Math.random() * botResponses.greeting.length)
+      ];
     }
-    if (text.includes("project") || text.includes("work") || text.includes("portfolio")) {
+    if (
+      text.includes("project") ||
+      text.includes("work") ||
+      text.includes("portfolio")
+    ) {
       return botResponses.projects;
     }
-    if (text.includes("contact") || text.includes("email") || text.includes("hire") || text.includes("message")) {
+    if (
+      text.includes("contact") ||
+      text.includes("email") ||
+      text.includes("hire") ||
+      text.includes("message")
+    ) {
       return botResponses.contact;
     }
-    if (text.includes("skill") || text.includes("tech") || text.includes("stack") || text.includes("language")) {
+    if (
+      text.includes("skill") ||
+      text.includes("tech") ||
+      text.includes("stack") ||
+      text.includes("language")
+    ) {
       return botResponses.skills;
     }
-    if (text.includes("who") || text.includes("about") || text.includes("taafeef") || text.includes("creator")) {
+    if (
+      text.includes("who") ||
+      text.includes("about") ||
+      text.includes("taafeef") ||
+      text.includes("creator")
+    ) {
       return botResponses.about;
     }
-    if (text.includes("joke") || text.includes("funny") || text.includes("laugh")) {
-      return botResponses.joke[Math.floor(Math.random() * botResponses.joke.length)];
+    if (
+      text.includes("joke") ||
+      text.includes("funny") ||
+      text.includes("laugh")
+    ) {
+      return botResponses.joke[
+        Math.floor(Math.random() * botResponses.joke.length)
+      ];
     }
-    if (text.includes("help") || text.includes("can you") || text.includes("commands")) {
+    if (
+      text.includes("help") ||
+      text.includes("can you") ||
+      text.includes("commands")
+    ) {
       return botResponses.help;
     }
     if (text.includes("time")) {
@@ -723,7 +764,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // 4. Sentiment Detection (Very basic)
-    if (text.includes("cool") || text.includes("awesome") || text.includes("love") || text.includes("nice")) {
+    if (
+      text.includes("cool") ||
+      text.includes("awesome") ||
+      text.includes("love") ||
+      text.includes("nice")
+    ) {
       return "Thank you! Taafeef put a lot of heart into this. Glad you're enjoying it!";
     }
 
@@ -768,7 +814,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const query = chip.getAttribute("data-query");
       chatInput.value = query;
       handleChat();
-      
+
       // Optional: Hide suggestions after use or keep them
       // document.getElementById('chat-suggestions').style.display = 'none';
     });
@@ -820,15 +866,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Handle theme color changes for particles
     function updateParticleColor() {
-        const isNight = document.body.classList.contains('theme-night');
-        particlesMaterial.color.set(isNight ? "#ef4444" : "#3b82f6");
+      const isNight = document.body.classList.contains("theme-night");
+      particlesMaterial.color.set(isNight ? "#ef4444" : "#3b82f6");
     }
     updateParticleColor();
     // Observe class changes on body to update color
     const observer = new MutationObserver(updateParticleColor);
-    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
 
-    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+    const particlesMesh = new THREE.Points(
+      particlesGeometry,
+      particlesMaterial,
+    );
     scene.add(particlesMesh);
 
     // Mouse Interaction
@@ -860,7 +912,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Rotation
       particlesMesh.rotation.y = elapsedTime * 0.05;
-      
+
       // Mouse Parallax
       particlesMesh.rotation.x = -mouseY * 0.2;
       particlesMesh.rotation.y += mouseX * 0.2;
